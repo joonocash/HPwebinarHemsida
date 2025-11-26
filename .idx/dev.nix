@@ -1,53 +1,53 @@
-# To learn more about how to use Nix to configure your environment
-# see: https://developers.google.com/idx/guides/customize-idx-env
 { pkgs, ... }: {
-  # Which nixpkgs channel to use.
-  channel = "stable-24.05"; # or "unstable"
-  # Use https://search.nixos.org/packages to find packages
+  # Use stable Nix package channel
+  channel = "stable-24.05";
+
+  # System packages to install
   packages = [
-    # pkgs.go
-    # pkgs.python311
-    # pkgs.python311Packages.pip
-    # pkgs.nodejs_20
-    # pkgs.nodePackages.nodemon
+    pkgs.python311           # Python 3.11
+    pkgs.postgresql_16       # PostgreSQL 16
+    pkgs.azure-cli           # Azure CLI
+    pkgs.google-cloud-sdk    # Google Cloud SDK (gcloud)
+    pkgs.git                 # Git version control
   ];
-  # Sets environment variables in the workspace
-  env = {};
+
+  # Environment variables
+  env = {
+    FLASK_APP = "main.py";
+    FLASK_ENV = "development";
+  };
+
+  # Enable PostgreSQL service
+  services.postgres = {
+    enable = true;
+    package = pkgs.postgresql_16;
+    enableTcp = true;
+  };
+
+  # Firebase Studio configuration
   idx = {
-    # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
+    # VS Code extensions
     extensions = [
-      # "vscodevim.vim"
       "google.gemini-cli-vscode-ide-companion"
+      "ms-python.python"
+      "ms-python.vscode-pylance"
     ];
-    # Enable previews
+
+    # Workspace lifecycle hooks
+    workspace = {
+      onCreate = {
+        default.openFiles = [ ".idx/dev.nix" "README.md" ];
+      };
+    };
+
+    # Preview configuration
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and show it in IDX's web preview panel
-        #   command = ["npm" "run" "dev"];
-        #   manager = "web";
-        #   env = {
-        #     # Environment variables to set for your server
-        #     PORT = "$PORT";
-        #   };
-        # };
-      };
-    };
-    # Workspace lifecycle hooks
-    workspace = {
-      # Runs when a workspace is first created
-      onCreate = {
-        # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
-        # Open editors for the following files by default, if they exist:
-        default.openFiles = [ ".idx/dev.nix" "README.md" ];
-      };
-      # Runs when the workspace is (re)started
-      onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
+        web = {
+          command = ["python" "main.py"];
+          manager = "web";
+        };
       };
     };
   };
