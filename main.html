@@ -159,6 +159,16 @@
             margin-top: 5px;
             display: none; /* Döljs initialt */
         }
+        
+        #success-message {
+            display: none;
+            padding: 20px;
+            background-color: var(--color-light-bg);
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--color-secondary);
+        }
+
 
         /* --- Agenda Tabell --- */
         .agenda-table {
@@ -296,6 +306,10 @@
         <section id="signup" class="section">
             <h2>Registrera dig för webinariet</h2>
             <div class="form-container">
+                <div id="success-message">
+                    <h3>Tack för din registrering!</h3>
+                    <p>En trollkarlspost (bekräftelsemail) är på väg.</p>
+                </div>
                 <form id="signup-form" aria-label="Registreringsformulär för Magin bakom Varumärket webinar">
                     <div class="form-group">
                         <label for="name">Namn <span aria-hidden="true">*</span></label>
@@ -317,6 +331,14 @@
                     <div class="form-group">
                         <label for="jobtitle">Befattning</label>
                         <input type="text" id="jobtitle" name="jobtitle" placeholder="T.ex. Marknadschef, Kommunikatör">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="terms">
+                            <input type="checkbox" id="terms" name="terms" required aria-required="true">
+                            Jag godkänner villkoren <span aria-hidden="true">*</span>
+                        </label>
+                        <p id="terms-error" class="error-message">Du måste godkänna villkoren.</p>
                     </div>
 
                     <button type="submit" class="cta-button">Skicka in Registrering</button>
@@ -361,21 +383,33 @@
                 emailField.setAttribute('aria-invalid', 'false');
             }
 
+            // --- Validering för Villkor ---
+            const termsField = document.getElementById('terms');
+            const termsError = document.getElementById('terms-error');
+            if (!termsField.checked) {
+                termsError.style.display = 'block';
+                termsField.setAttribute('aria-invalid', 'true');
+                isValid = false;
+            } else {
+                termsError.style.display = 'none';
+                termsField.setAttribute('aria-invalid', 'false');
+            }
+
             // --- Om Validering är Godkänd ---
             if (isValid) {
-                // Här lägger du till koden för att skicka data.
-                // I ett verkligt Firebase-projekt skulle du använda Firebase Functions, Firestore
-                // eller ett verktyg som Firebase Realtime Database/Firestore för att lagra registreringarna.
-                
-                alert('Tack för din registrering! En trollkarlspost (bekräftelsemail) är på väg till ' + emailField.value + '.');
+                // Göm formuläret
+                const form = document.getElementById('signup-form');
+                form.style.display = 'none';
+
+                // Visa framgångsmeddelandet
+                const successMessage = document.getElementById('success-message');
+                successMessage.querySelector('p').textContent = 'En uggla med bekräftelsepost är på väg till ' + emailField.value + '.';
+                successMessage.style.display = 'block';
                 
                 // Återställ formuläret efter lyckad registrering
-                this.reset();
+                form.reset();
             }
         });
     </script>
-</body>
-</html>
-</script>
 </body>
 </html>
