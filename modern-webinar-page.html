@@ -251,14 +251,61 @@
             border-top: 1px solid var(--color-light-gold);
             font-size: 0.9em;
         }
-        
+
         @media (max-width: 992px) {
             .container {
                 grid-template-columns: 1fr;
+                padding: 20px;
             }
             aside {
                 position: static;
                 top: auto;
+            }
+            header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .agenda-table thead {
+                display: none; 
+            }
+            .agenda-table, .agenda-table tbody, .agenda-table tr, .agenda-table td {
+                display: block;
+                width: 100%;
+            }
+            .agenda-table tr {
+                margin-bottom: 15px;
+                border: 1px solid rgba(232, 196, 108, 0.2);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .agenda-table td {
+                text-align: right; 
+                padding-left: 50%; 
+                position: relative;
+                 border: none;
+            }
+            .agenda-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: calc(50% - 30px);
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                 color: var(--color-light-gold);
+            }
+             .agenda-table .break-row td {
+                text-align: center;
+                padding-left: 15px;
+                font-style: italic;
+                background-color: rgba(0,0,0,0.2);
+                color: var(--color-light-gold);
+            }
+            .agenda-table .break-row td::before {
+                display: none;
             }
         }
 
@@ -340,53 +387,53 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>09:00 - 09:45</td>
-                                <td>Minerva McGonagall</td>
-                                <td><strong>Bok 1: Harry Potter och de vises sten</strong><br>Introduktion till den magiska världen.</td>
+                                <td data-label="Tid">09:00 - 09:45</td>
+                                <td data-label="Talare">Minerva McGonagall</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 1: Harry Potter och de vises sten</strong><br>Introduktion till den magiska världen.</td>
                             </tr>
                             <tr>
-                                <td>09:45 - 10:30</td>
-                                <td>Gilderoy Lockhart</td>
-                                <td><strong>Bok 2: Harry Potter och Hemligheternas kammare</strong><br>En kritisk genomgång av plotholes och narrativa val.</td>
+                                <td data-label="Tid">09:45 - 10:30</td>
+                                <td data-label="Talare">Gilderoy Lockhart</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 2: Harry Potter och Hemligheternas kammare</strong><br>En kritisk genomgång av plotholes och narrativa val.</td>
                             </tr>
                             <tr class="break-row">
                                 <td colspan="3">10:30 - 10:45 | Kort paus för förfriskningar</td>
                             </tr>
                             <tr>
-                                <td>10:45 - 11:30</td>
-                                <td>Remus Lupin</td>
-                                <td><strong>Bok 3: Harry Potter och fången från Azkaban</strong><br>Analys av mörker, vänskap och nya karaktärer.</td>
+                                <td data-label="Tid">10:45 - 11:30</td>
+                                <td data-label="Talare">Remus Lupin</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 3: Harry Potter och fången från Azkaban</strong><br>Analys av mörker, vänskap och nya karaktärer.</td>
                             </tr>
                             <tr>
-                                <td>11:30 - 12:15</td>
-                                <td>Alastor Moody</td>
-                                <td><strong>Bok 4: Harry Potter och den flammande bägaren</strong><br>Vändpunkten: faror, tävlingar och ondskans återkomst.</td>
+                                <td data-label="Tid">11:30 - 12:15</td>
+                                <td data-label="Talare">Alastor Moody</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 4: Harry Potter och den flammande bägaren</strong><br>Vändpunkten: faror, tävlingar och ondskans återkomst.</td>
                             </tr>
                             <tr class="break-row">
                                 <td colspan="3">12:15 - 13:15 | Lunchpaus (Mat och dryck ingår ej)</td>
                             </tr>
                             <tr>
-                                <td>13:15 - 14:00</td>
-                                <td>Dolores Umbridge</td>
-                                <td><strong>Bok 5: Harry Potter och Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</td>
+                                <td data-label="Tid">13:15 - 14:00</td>
+                                <td data-label="Talare">Dolores Umbridge</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 5: Harry Potter och Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</td>
                             </tr>
                             <tr>
-                                <td>14:00 - 14:45</td>
-                                <td>Horace Slughorn</td>
-                                <td><strong>Bok 6: Harry Potter och Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</td>
+                                <td data-label="Tid">14:00 - 14:45</td>
+                                <td data-label="Talare">Horace Slughorn</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 6: Harry Potter och Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</td>
                             </tr>
                             <tr class="break-row">
                                 <td colspan="3">14:45 - 15:00 | Kort paus för bensträckare</td>
                             </tr>
                             <tr>
-                                <td>15:00 - 15:45</td>
-                                <td>Albus Dumbledore</td>
-                                 <td><strong>Bok 7: Harry Potter och dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</td>
+                                <td data-label="Tid">15:00 - 15:45</td>
+                                <td data-label="Talare">Albus Dumbledore</td>
+                                 <td data-label="Bok & Ämne"><strong>Bok 7: Harry Potter och dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</td>
                             </tr>
                              <tr>
-                                <td>15:45 - 17:00</td>
-                                <td>Alla talare</td>
-                                <td><strong>Öppen paneldiskussion & Q&A</strong><br>Dina frågor, deras magiska svar.</td>
+                                <td data-label="Tid">15:45 - 17:00</td>
+                                <td data-label="Talare">Alla talare</td>
+                                <td data-label="Bok & Ämne"><strong>Öppen paneldiskussion & Q&A</strong><br>Dina frågor, deras magiska svar.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -416,7 +463,7 @@
                     </div>
                     <div class="form-group checkbox-group">
                         <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms" style="display: inline; margin-bottom: 0;">Jag svär högtidligt att jag är beredd på bus *</label>
+                        <label for="terms" style="display: inline; margin-bottom: 0;">Jag godkänner att min och mina framtida generationers privata data sparas på eran server förevigt och säljs till massa tredje parter*</label>
                     </div>
                     <button type="submit" class="cta-button">Reservera din plats</button>
                 </form>
