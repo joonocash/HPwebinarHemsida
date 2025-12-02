@@ -88,6 +88,33 @@
             margin-top: 0;
         }
 
+        .accordion {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion::after {
+            content: '▼';
+            color: var(--color-light-gold);
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active::after {
+            transform: rotate(-180deg);
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: transparent;
+        }
+
+
         ul {
             list-style-type: '⚡️';
             padding-left: 20px;
@@ -258,108 +285,112 @@
             </section>
 
             <section id="speakers" class="section">
-                <h2>Möt dagens guider i den magiska världen</h2>
-                <div class="speakers-grid">
-                    <article class="speaker-card">
-                        <h3>Minerva McGonagall</h3>
-                        <p><em>Professor i Förvandlingskonst & Litteraturvetenskap</em></p>
-                        <p><strong>Ämne: De Vises Sten</strong><br>En analys av början på en saga.</p>
-                    </article>
-                    <article class="speaker-card">
-                        <h3>Gyllenroy Lockman</h3>
-                        <p><em>Berömd författare & Expert på Mörkrets Makter</em></p>
-                        <p><strong>Ämne: Hemligheternas Kammare</strong><br>Avslöjar dolda plotholes och narrativa brister.</p>
-                    </article>
-                     <article class="speaker-card">
-                        <h3>Remus Lupin</h3>
-                        <p><em>Tidigare lärare & Varulvsexpert</em></p>
-                        <p><strong>Ämne: Fången från Azkaban</strong><br>Introduktionen av mörkare teman och komplexa karaktärer.</p>
-                    </article>
-                     <article class="speaker-card">
-                        <h3>Alastor "Monsterögat" Moody</h3>
-                        <p><em>Legendarisk Auror</em></p>
-                        <p><strong>Ämne: Den Flammande Bägaren</strong><br>Om farorna, tävlingarna och återkomsten av Voldemort.</p>
-                    </article>
-                    <article class="speaker-card">
-                        <h3>Dolores Umbridge</h3>
-                        <p><em>Överinkvisitor & Professor</em></p>
-                        <p><strong>Ämne: Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</p>
-                    </article>
-                    <article class="speaker-card">
-                        <h3>Horace Slughorn</h3>
-                        <p><em>Mästare i Trolldryckskonst</em></p>
-                        <p><strong>Ämne: Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</p>
-                    </article>
-                    <article class="speaker-card">
-                        <h3>Albus Dumbledore</h3>
-                        <p><em>Rektor & Grundare av Fenixorden</em></p>
-                        <p><strong>Ämne: Dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</p>
-                    </article>
+                <h2 class="accordion">Möt dagens guider i den magiska världen</h2>
+                <div class="panel">
+                    <div class="speakers-grid">
+                        <article class="speaker-card">
+                            <h3>Minerva McGonagall</h3>
+                            <p><em>Professor i Förvandlingskonst & Litteraturvetenskap</em></p>
+                            <p><strong>Ämne: De Vises Sten</strong><br>En analys av början på en saga.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Gilderoy Lockhart</h3>
+                            <p><em>Berömd författare & Expert på Mörkrets Makter</em></p>
+                            <p><strong>Ämne: Hemligheternas Kammare</strong><br>Avslöjar dolda plotholes och narrativa brister.</p>
+                        </article>
+                         <article class="speaker-card">
+                            <h3>Remus Lupin</h3>
+                            <p><em>Tidigare lärare & Varulvsexpert</em></p>
+                            <p><strong>Ämne: Fången från Azkaban</strong><br>Introduktionen av mörkare teman och komplexa karaktärer.</p>
+                        </article>
+                         <article class="speaker-card">
+                            <h3>Alastor "Monsterögat" Moody</h3>
+                            <p><em>Legendarisk Auror</em></p>
+                            <p><strong>Ämne: Den Flammande Bägaren</strong><br>Om farorna, tävlingarna och återkomsten av Voldemort.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Dolores Umbridge</h3>
+                            <p><em>Överinkvisitor & Professor</em></p>
+                            <p><strong>Ämne: Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Horace Slughorn</h3>
+                            <p><em>Mästare i Trolldryckskonst</em></p>
+                            <p><strong>Ämne: Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Albus Dumbledore</h3>
+                            <p><em>Rektor & Grundare av Fenixorden</em></p>
+                            <p><strong>Ämne: Dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</p>
+                        </article>
+                    </div>
                 </div>
             </section>
 
             <section id="agenda" class="section">
-                <h2>Dagens Agenda: En resa genom böckerna</h2>
-                <table class="agenda-table">
-                    <thead>
-                        <tr>
-                            <th>Tid</th>
-                            <th>Talare</th>
-                            <th>Bok & Ämne</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>09:00 - 09:45</td>
-                            <td>Minerva McGonagall</td>
-                            <td><strong>Bok 1: Harry Potter och de vises sten</strong><br>Introduktion till den magiska världen.</td>
-                        </tr>
-                        <tr>
-                            <td>09:45 - 10:30</td>
-                            <td>Gyllenroy Lockman</td>
-                            <td><strong>Bok 2: Harry Potter och Hemligheternas kammare</strong><br>En kritisk genomgång av plotholes och narrativa val.</td>
-                        </tr>
-                        <tr class="break-row">
-                            <td colspan="3">10:30 - 10:45 | Kort paus för förfriskningar</td>
-                        </tr>
-                        <tr>
-                            <td>10:45 - 11:30</td>
-                            <td>Remus Lupin</td>
-                            <td><strong>Bok 3: Harry Potter och fången från Azkaban</strong><br>Analys av mörker, vänskap och nya karaktärer.</td>
-                        </tr>
-                        <tr>
-                            <td>11:30 - 12:15</td>
-                            <td>Alastor Moody</td>
-                            <td><strong>Bok 4: Harry Potter och den flammande bägaren</strong><br>Vändpunkten: faror, tävlingar och ondskans återkomst.</td>
-                        </tr>
-                        <tr class="break-row">
-                            <td colspan="3">12:15 - 13:15 | Lunchpaus (Mat och dryck ingår ej)</td>
-                        </tr>
-                        <tr>
-                            <td>13:15 - 14:00</td>
-                            <td>Dolores Umbridge</td>
-                            <td><strong>Bok 5: Harry Potter och Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</td>
-                        </tr>
-                        <tr>
-                            <td>14:00 - 14:45</td>
-                            <td>Horace Slughorn</td>
-                            <td><strong>Bok 6: Harry Potter och Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</td>
-                        </tr>
-                        <tr class="break-row">
-                            <td colspan="3">14:45 - 15:00 | Kort paus för bensträckare</td>
-                        </tr>
-                        <tr>
-                            <td>15:00 - 15:45</td>
-                            <td>Albus Dumbledore</td>
-                             <td><strong>Bok 7: Harry Potter och dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</td>
-                        </tr>
-                         <tr>
-                            <td>15:45 - 17:00</td>
-                            <td>Alla talare</td>
-                            <td><strong>Öppen paneldiskussion & Q&A</strong><br>Dina frågor, deras magiska svar.</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 class="accordion">Dagens Agenda: En resa genom böckerna</h2>
+                <div class="panel">
+                    <table class="agenda-table">
+                        <thead>
+                            <tr>
+                                <th>Tid</th>
+                                <th>Talare</th>
+                                <th>Bok & Ämne</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>09:00 - 09:45</td>
+                                <td>Minerva McGonagall</td>
+                                <td><strong>Bok 1: Harry Potter och de vises sten</strong><br>Introduktion till den magiska världen.</td>
+                            </tr>
+                            <tr>
+                                <td>09:45 - 10:30</td>
+                                <td>Gilderoy Lockhart</td>
+                                <td><strong>Bok 2: Harry Potter och Hemligheternas kammare</strong><br>En kritisk genomgång av plotholes och narrativa val.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">10:30 - 10:45 | Kort paus för förfriskningar</td>
+                            </tr>
+                            <tr>
+                                <td>10:45 - 11:30</td>
+                                <td>Remus Lupin</td>
+                                <td><strong>Bok 3: Harry Potter och fången från Azkaban</strong><br>Analys av mörker, vänskap och nya karaktärer.</td>
+                            </tr>
+                            <tr>
+                                <td>11:30 - 12:15</td>
+                                <td>Alastor Moody</td>
+                                <td><strong>Bok 4: Harry Potter och den flammande bägaren</strong><br>Vändpunkten: faror, tävlingar och ondskans återkomst.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">12:15 - 13:15 | Lunchpaus (Mat och dryck ingår ej)</td>
+                            </tr>
+                            <tr>
+                                <td>13:15 - 14:00</td>
+                                <td>Dolores Umbridge</td>
+                                <td><strong>Bok 5: Harry Potter och Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</td>
+                            </tr>
+                            <tr>
+                                <td>14:00 - 14:45</td>
+                                <td>Horace Slughorn</td>
+                                <td><strong>Bok 6: Harry Potter och Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">14:45 - 15:00 | Kort paus för bensträckare</td>
+                            </tr>
+                            <tr>
+                                <td>15:00 - 15:45</td>
+                                <td>Albus Dumbledore</td>
+                                 <td><strong>Bok 7: Harry Potter och dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</td>
+                            </tr>
+                             <tr>
+                                <td>15:45 - 17:00</td>
+                                <td>Alla talare</td>
+                                <td><strong>Öppen paneldiskussion & Q&A</strong><br>Dina frågor, deras magiska svar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </main>
 
@@ -411,6 +442,19 @@
             } else {
                 form.reportValidity();
             }
+        });
+
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(acc => {
+            acc.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
         });
     </script>
 
