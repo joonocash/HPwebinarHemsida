@@ -1,5 +1,6 @@
 # PostgreSQL data directory
 .data/
+keys/
 
 # Python virtual environments
 venv/

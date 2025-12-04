@@ -4,6 +4,7 @@
 
   # System packages to install
   packages = [
+    pkgs.openssh             # Open SSH
     pkgs.python311           # Python 3.11
     pkgs.postgresql_16       # PostgreSQL 16
     pkgs.azure-cli           # Azure CLI
