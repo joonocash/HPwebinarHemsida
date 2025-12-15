@@ -1,0 +1,17 @@
+#cloud-config
+packages:
+  - nginx
+write_files:
+  - path: /etc/nginx/sites-available/default
+    content: |
+      server {
+        listen 80;
+        location / {
+          proxy_pass http://webserver.internal.cloudapp.net:8080/;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+      }      
+runcmd:
+  - systemctl restart nginx
