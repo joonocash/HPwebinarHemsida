@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Magisk Resa Genom Sju Böcker: Harry Potter Webinariet</title>
+    <meta name="description" content="Ett heldagswebinar dedikerat till Harry Potter-böckerna. Utforska teman, karaktärer och hemligheter med våra expert-talare.">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@400;600&display=swap');
+
+        :root {
+            --color-dark-green: #0a2e1c;
+            --color-light-gold: #e8c46c;
+            --color-light-text: #f0f0f0;
+            --color-background: #051a10;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-light-text);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        main {
+            grid-column: 1 / 2;
+        }
+
+        aside {
+            grid-column: 2 / 3;
+            position: sticky;
+            top: 40px;
+        }
+
+        header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--color-light-gold);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            color: var(--color-light-gold);
+            font-family: var(--font-serif);
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .section {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+            border: 1px solid rgba(232, 196, 108, 0.2);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            color: var(--color-light-gold);
+            font-family: var(--font-serif);
+            font-size: 2.2em;
+            border-bottom: 1px solid var(--color-light-gold);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .accordion {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion::after {
+            content: '▼';
+            color: var(--color-light-gold);
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.active::after {
+            transform: rotate(-180deg);
+        }
+
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: transparent;
+        }
+
+        ul {
+            list-style-type: '⚡️';
+            padding-left: 20px;
+        }
+
+        ul li {
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .speaker-card {
+            text-align: center;
+        }
+
+        .speaker-card h3 {
+            color: var(--color-light-gold);
+            font-family: var(--font-serif);
+            font-size: 1.5em;
+        }
+
+        .agenda-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .agenda-table th, .agenda-table td {
+            border: 1px solid rgba(232, 196, 108, 0.2);
+            padding: 15px;
+            text-align: left;
+        }
+
+        .agenda-table th {
+            background-color: rgba(232, 196, 108, 0.1);
+            color: var(--color-light-gold);
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+        
+        .agenda-table .break-row td {
+            text-align: center;
+            font-style: italic;
+            background-color: rgba(0,0,0,0.2);
+            color: var(--color-light-gold);
+        }
+
+        .form-container {
+            background: linear-gradient(145deg, rgba(10, 46, 28, 0.8), rgba(5, 26, 16, 0.9));
+            border: 1px solid rgba(232, 196, 108, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .form-container h2 {
+           font-size: 1.8em;
+           text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            accent-color: var(--color-light-gold);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--color-light-gold);
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(232, 196, 108, 0.5);
+            border-radius: 8px;
+            background-color: rgba(0,0,0,0.3);
+            color: var(--color-light-text);
+            box-sizing: border-box;
+            font-family: var(--font-sans);
+        }
+        
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: 2px solid var(--color-light-gold);
+            border-color: var(--color-light-gold);
+        }
+
+        .cta-button {
+            background-color: var(--color-light-gold);
+            color: var(--color-dark-green);
+            font-weight: bold;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 8px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover, .cta-button:focus {
+            background-color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .cta-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.5);
+            color: #ff6b6b;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid var(--color-light-gold);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            aside {
+                position: static;
+                top: auto;
+            }
+            header h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .agenda-table thead {
+                display: none; 
+            }
+            .agenda-table, .agenda-table tbody, .agenda-table tr, .agenda-table td {
+                display: block;
+                width: 100%;
+            }
+            .agenda-table tr {
+                margin-bottom: 15px;
+                border: 1px solid rgba(232, 196, 108, 0.2);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .agenda-table td {
+                text-align: right; 
+                padding-left: 50%; 
+                position: relative;
+                 border: none;
+            }
+            .agenda-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: calc(50% - 30px);
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                 color: var(--color-light-gold);
+            }
+             .agenda-table .break-row td {
+                text-align: center;
+                padding-left: 15px;
+                font-style: italic;
+                background-color: rgba(0,0,0,0.2);
+                color: var(--color-light-gold);
+            }
+            .agenda-table .break-row td::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header role="banner">
+            <h1>En Magisk Resa Genom Sju Böcker</h1>
+            <p>Ett exklusivt heldagswebinar där vi dyker djupt ner i Harry Potters värld, bok för bok. Från De Vises Sten till Dödsrelikerna.</p>
+            <p><strong>Fredag 24 januari, kl. 09:00 – 17:00 (Digitalt)</strong></p>
+        </header>
+
+        <main>
+            <section id="why-attend" class="section">
+                <h2>Varför du ska delta</h2>
+                <p>Detta är mer än bara en bokcirkel. Det är en heldagsdjupdykning i det litterära universum som har förtrollat en hel värld. Vi kommer att analysera teman, karaktärsutveckling, och den bestående magin i J.K. Rowlings mästerverk.</p>
+                <ul>
+                    <li>Utforska de filosofiska och moraliska teman som genomsyrar serien.</li>
+                    <li>Delta i diskussioner om karaktärernas psykologi och utveckling.</li>
+                    <li>Avslöja dolda detaljer och "plotholes" med våra expertguider.</li>
+                </ul>
+            </section>
+
+            <section id="speakers" class="section">
+                <h2 class="accordion">Möt dagens guider i den magiska världen</h2>
+                <div class="panel">
+                    <div class="speakers-grid">
+                        <article class="speaker-card">
+                            <h3>Minerva McGonagall</h3>
+                            <p><em>Professor i Förvandlingskonst & Litteraturvetenskap</em></p>
+                            <p><strong>Ämne: De Vises Sten</strong><br>En analys av början på en saga.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Gilderoy Lockhart</h3>
+                            <p><em>Berömd författare & Expert på Mörkrets Makter</em></p>
+                            <p><strong>Ämne: Hemligheternas Kammare</strong><br>Avslöjar dolda plotholes och narrativa brister.</p>
+                        </article>
+                         <article class="speaker-card">
+                            <h3>Remus Lupin</h3>
+                            <p><em>Tidigare lärare & Varulvsexpert</em></p>
+                            <p><strong>Ämne: Fången från Azkaban</strong><br>Introduktionen av mörkare teman och komplexa karaktärer.</p>
+                        </article>
+                         <article class="speaker-card">
+                            <h3>Alastor "Monsterögat" Moody</h3>
+                            <p><em>Legendarisk Auror</em></p>
+                            <p><strong>Ämne: Den Flammande Bägaren</strong><br>Om farorna, tävlingarna och återkomsten av Voldemort.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Dolores Umbridge</h3>
+                            <p><em>Överinkvisitor & Professor</em></p>
+                            <p><strong>Ämne: Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Horace Slughorn</h3>
+                            <p><em>Mästare i Trolldryckskonst</em></p>
+                            <p><strong>Ämne: Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</p>
+                        </article>
+                        <article class="speaker-card">
+                            <h3>Albus Dumbledore</h3>
+                            <p><em>Rektor & Grundare av Fenixorden</em></p>
+                            <p><strong>Ämne: Dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="agenda" class="section">
+                <h2 class="accordion">Dagens Agenda: En resa genom böckerna</h2>
+                <div class="panel">
+                    <table class="agenda-table">
+                        <thead>
+                            <tr>
+                                <th>Tid</th>
+                                <th>Talare</th>
+                                <th>Bok & Ämne</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-label="Tid">09:00 - 09:45</td>
+                                <td data-label="Talare">Minerva McGonagall</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 1: Harry Potter och de vises sten</strong><br>Introduktion till den magiska världen.</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">09:45 - 10:30</td>
+                                <td data-label="Talare">Gilderoy Lockhart</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 2: Harry Potter och Hemligheternas kammare</strong><br>En kritisk genomgång av plotholes och narrativa val.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">10:30 - 10:45 | Kort paus för förfriskningar</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">10:45 - 11:30</td>
+                                <td data-label="Talare">Remus Lupin</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 3: Harry Potter och fången från Azkaban</strong><br>Analys av mörker, vänskap och nya karaktärer.</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">11:30 - 12:15</td>
+                                <td data-label="Talare">Alastor Moody</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 4: Harry Potter och den flammande bägaren</strong><br>Vändpunkten: faror, tävlingar och ondskans återkomst.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">12:15 - 13:15 | Lunchpaus (Mat och dryck ingår ej)</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">13:15 - 14:00</td>
+                                <td data-label="Talare">Dolores Umbridge</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 5: Harry Potter och Fenixorden</strong><br>Byråkrati, maktmissbruk och organiserat motstånd.</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">14:00 - 14:45</td>
+                                <td data-label="Talare">Horace Slughorn</td>
+                                <td data-label="Bok & Ämne"><strong>Bok 6: Harry Potter och Halvblodsprinsen</strong><br>Horrokruxer, minnen och uppoffringar.</td>
+                            </tr>
+                            <tr class="break-row">
+                                <td colspan="3">14:45 - 15:00 | Kort paus för bensträckare</td>
+                            </tr>
+                            <tr>
+                                <td data-label="Tid">15:00 - 15:45</td>
+                                <td data-label="Talare">Albus Dumbledore</td>
+                                 <td data-label="Bok & Ämne"><strong>Bok 7: Harry Potter och dödsrelikerna</strong><br>Kärlek, död och det ultimata slutet.</td>
+                            </tr>
+                             <tr>
+                                <td data-label="Tid">15:45 - 17:00</td>
+                                <td data-label="Talare">Alla talare</td>
+                                <td data-label="Bok & Ämne"><strong>Öppen paneldiskussion & Q&A</strong><br>Dina frågor, deras magiska svar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <aside>
+             <section id="signup" class="section form-container">
+                <h2>Registrera dig nu</h2>
+                <div id="error-message" class="error-message" style="display:none;"></div>
+                <div id="success-message" style="display:none;">
+                    <h3>Tack för din registrering!</h3>
+                    <p>En bekräftelseuggla är på väg.</p>
+                </div>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="name">Namn *</label>
+                        <input type="text" id="name" name="name" required placeholder="Förnamn Efternamn">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-post *</label>
+                        <input type="email" id="email" name="email" required placeholder="ditt.namn@exempel.se">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Företag</label>
+                        <input type="text" id="company" name="company" placeholder="Ditt Företags Namn">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Adress</label>
+                        <input type="text" id="address" name="address" placeholder="Din Adress">
+                    </div>
+                    <div class="form-group">
+                        <label for="job_title">Jobbtitel</label>
+                        <input type="text" id="job_title" name="job_title" placeholder="Din Jobbtitel">
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms" style="display: inline; margin-bottom: 0;">Jag godkänner att min och mina framtida generationers privata data sparas på eran server förevigt och säljs till massa tredje parter*</label>
+                    </div>
+                    <button type="submit" class="cta-button" id="submit-btn">Reservera din plats</button>
+                </form>
+            </section>
+        </aside>
+
+        <footer role="contentinfo">
+            <p>&copy; 2025 Avdelningen för Scrum n' Coke. I solemnly swear that i am up to no good.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Registration form handler with Flask API integration
+        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitBtn = document.getElementById('submit-btn');
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+            
+            // Hide previous messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Skickar...';
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                address: document.getElementById('address').value,
+                job_title: document.getElementById('job_title').value
+            };
+
+            try {
+                // Send to Flask backend API
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // Show success message
+                    form.style.display = 'none';
+                    successDiv.style.display = 'block';
+                    document.querySelector('#signup h2').textContent = 'Du är registrerad!';
+                } else {
+                    // Show error message
+                    errorDiv.textContent = 'Ett fel uppstod: ' + (data.message || 'Kunde inte skicka registrering');
+                    errorDiv.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Reservera din plats';
+                }
+            } catch (error) {
+                // Network or other error
+                errorDiv.textContent = 'Ett fel uppstod vid anslutningen. Försök igen senare.';
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Reservera din plats';
+                console.error('Registration error:', error);
+            }
+        });
+
+        // Accordion functionality
+        const accordions = document.querySelectorAll('.accordion');
+        accordions.forEach(acc => {
+            acc.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        });
+    </script>
+
+</body>
+</html>

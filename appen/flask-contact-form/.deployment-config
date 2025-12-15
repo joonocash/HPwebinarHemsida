@@ -1,0 +1,8 @@
+# Auto-generated deployment configuration
+# Created: Mon Dec 15 02:34:27 PM UTC 2025
+BASTION_IP=4.223.227.51
+WEB_IP=10.0.0.5
+FLASK_IP=10.0.0.4
+WEB_PUBLIC_IP=20.91.249.243
+ADMIN_USER=azureuser
+RESOURCE_GROUP=HPWebinar-RG

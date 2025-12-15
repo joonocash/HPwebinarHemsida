@@ -1,0 +1,117 @@
+#cloud-config
+packages:
+  - python3
+  - python3-pip
+  - python3-venv
+  - nginx
+
+write_files:
+  - path: /home/azureuser/app.py
+    content: |
+      import os
+      from datetime import datetime
+      from flask import Flask, request, jsonify
+      from flask_sqlalchemy import SQLAlchemy
+      from flask_cors import CORS
+
+      app = Flask(__name__)
+      CORS(app)
+
+      app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///registrations.db')
+      app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+      db = SQLAlchemy(app)
+
+      class Registration(db.Model):
+          id = db.Column(db.Integer, primary_key=True)
+          name = db.Column(db.String(100), nullable=False)
+          email = db.Column(db.String(120), nullable=False)
+          company = db.Column(db.String(100))
+          address = db.Column(db.String(200))
+          job_title = db.Column(db.String(100))
+          created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+      with app.app_context():
+          db.create_all()
+
+      @app.route('/api/register', methods=['POST'])
+      def register():
+          try:
+              data = request.get_json()
+              registration = Registration(
+                  name=data.get('name'),
+                  email=data.get('email'),
+                  company=data.get('company', ''),
+                  address=data.get('address', ''),
+                  job_title=data.get('job_title', '')
+              )
+              db.session.add(registration)
+              db.session.commit()
+              return jsonify({'success': True, 'message': 'Registration successful!'}), 200
+          except Exception as e:
+              return jsonify({'success': False, 'message': str(e)}), 500
+
+      @app.route('/api/registrations', methods=['GET'])
+      def get_registrations():
+          registrations = Registration.query.order_by(Registration.created_at.desc()).all()
+          return jsonify([{
+              'id': r.id,
+              'name': r.name,
+              'email': r.email,
+              'company': r.company,
+              'address': r.address,
+              'job_title': r.job_title,
+              'created_at': r.created_at.isoformat()
+          } for r in registrations])
+
+      @app.route('/health')
+      def health():
+          return jsonify({'status': 'healthy'}), 200
+
+      if __name__ == '__main__':
+          app.run(host='0.0.0.0', port=5000)
+
+  - path: /home/azureuser/requirements.txt
+    content: |
+      flask
+      gunicorn
+      flask-sqlalchemy
+      flask-cors
+      psycopg2-binary
+
+  - path: /etc/systemd/system/flask-app.service
+    content: |
+      [Unit]
+      Description=Flask Registration Backend
+      After=network.target
+
+      [Service]
+      User=azureuser
+      WorkingDirectory=/home/azureuser
+      Environment="DATABASE_URL=postgresql://hpadmin:MagicPassword123!@hpwebinar-db-1765808661.postgres.database.azure.com:5432/webinarregistrations"
+      ExecStart=/home/azureuser/venv/bin/gunicorn --workers 2 --bind 0.0.0.0:5000 app:app
+      Restart=always
+      RestartSec=10
+
+      [Install]
+      WantedBy=multi-user.target
+
+  - path: /etc/nginx/sites-available/default
+    content: |
+      server {
+        listen 5000;
+        location / {
+          proxy_pass http://127.0.0.1:5000;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+        }
+      }
+
+runcmd:
+  - cd /home/azureuser
+  - python3 -m venv venv
+  - source venv/bin/activate && pip install -r requirements.txt
+  - chown -R azureuser:azureuser /home/azureuser
+  - systemctl daemon-reload
+  - systemctl enable flask-app
+  - systemctl start flask-app
